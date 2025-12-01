@@ -1,4 +1,4 @@
-<UpdatedStyleBlock>
+<UpdatedStyleBlock>Enhanced Creative Styles with More Moving Effects</UpdatedStyleBlock>
 <style>
     :root {
         --primary-color: #ad1f37;
@@ -6,6 +6,10 @@
         --accent-color: #f39c12;
         --success-color: #27ae60;
         --warning-color: #e74c3c;
+        --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
     }
     
     * {
@@ -18,40 +22,184 @@
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         color: var(--secondary-color);
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
 
-    /* Text Box Enhancement Styles */
+    /* Animated Background with Moving Gradient */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(173, 31, 55, 0.03) 0%, rgba(243, 156, 18, 0.03) 50%, rgba(102, 126, 234, 0.03) 100%);
+        background-size: 400% 400%;
+        z-index: -1;
+        animation: gradientMove 20s ease infinite;
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Particles Animation */
+    .floating-particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: float 20s infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+        25% { transform: translateY(-100px) translateX(50px) scale(1.2); }
+        50% { transform: translateY(-200px) translateX(-50px) scale(0.8); }
+        75% { transform: translateY(-100px) translateX(100px) scale(1.5); }
+    }
+
+    /* Cursor Follower Effect */
+    .cursor-follower {
+        position: fixed;
+        width: 30px;
+        height: 30px;
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transition: all 0.15s ease-out;
+        opacity: 0.5;
+    }
+
+    /* Creative Text Box Enhancement with Floating Effect */
     .text-box-enhanced {
-        border: 1px solid #e0e0e0;
-        background-color: #f8f9fa;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid transparent;
+        background: linear-gradient(white, white) padding-box,
+                    linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c) border-box;
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        animation: gentleFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes gentleFloat {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .text-box-enhanced::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(173, 31, 55, 0.1), transparent);
+        transform: rotate(45deg);
+        transition: all 0.6s;
+        animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { left: -50%; }
+        100% { left: 100%; }
     }
 
     .text-box-enhanced:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-15px) scale(1.03) rotateZ(1deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        animation: none;
     }
 
-    /* Enhanced card styles */
+    .text-box-enhanced:hover::before {
+        left: 100%;
+    }
+
+    /* Enhanced Card Styles with Glassmorphism and Breathing Effect */
     .card-enhanced {
-        border: 1px solid #e0e0e0;
-        background-color: #f8f9fa;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        animation: breathe 4s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+    }
+
+    .card-enhanced::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(173, 31, 55, 0.1) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.5s;
+        animation: rotateGlow 10s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
 
     .card-enhanced:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-20px) rotateX(5deg);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        animation: none;
+    }
+
+    .card-enhanced:hover::after {
+        opacity: 1;
+        animation: pulse 2s infinite, rotateGlow 10s linear infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.1) rotate(180deg); }
     }
     
-    /* Header Styles */
+    /* Header with Glassmorphism */
     header {
-        background: white;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         position: fixed;
         width: 100%;
         top: 0;
         z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        animation: slideDown 0.6s ease-out;
+    }
+
+    @keyframes slideDown {
+        from { transform: translateY(-100%); }
+        to { transform: translateY(0); }
     }
     
     nav {
@@ -66,7 +214,20 @@
     .logo {
         font-size: 1.5rem;
         font-weight: bold;
-        color: var(--primary-color);
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: logoShine 3s infinite, logoBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes logoShine {
+        0%, 100% { filter: brightness(1); }
+        50% { filter: brightness(1.3); }
+    }
+
+    @keyframes logoBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
     }
     
     .nav-links {
@@ -79,26 +240,80 @@
         text-decoration: none;
         color: var(--secondary-color);
         font-weight: 500;
-        transition: color 0.3s;
+        transition: all 0.3s;
+        position: relative;
+        display: inline-block;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: var(--gradient-1);
+        transition: width 0.3s;
     }
     
     .nav-links a:hover {
         color: var(--primary-color);
+        transform: translateY(-2px) scale(1.05);
+        animation: wiggle 0.5s ease-in-out;
+    }
+
+    @keyframes wiggle {
+        0%, 100% { transform: translateY(-2px) rotate(0deg); }
+        25% { transform: translateY(-2px) rotate(-3deg); }
+        75% { transform: translateY(-2px) rotate(3deg); }
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
     }
     
     .cta-button {
-        background: var(--primary-color);
+        background: var(--gradient-1);
         color: white;
         padding: 0.75rem 1.5rem;
         border: none;
         border-radius: 25px;
         cursor: pointer;
         font-weight: bold;
-        transition: background 0.3s;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(173, 31, 55, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.5s, height 0.5s;
     }
     
+    .cta-button:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
     .cta-button:hover {
-        background: #8b1829;
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(173, 31, 55, 0.5);
+        animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateY(-3px) translateX(0); }
+        25% { transform: translateY(-3px) translateX(-5px); }
+        75% { transform: translateY(-3px) translateX(5px); }
     }
     
     .mobile-menu-toggle {
@@ -115,7 +330,7 @@
         transition: 0.3s;
     }
     
-    /* Hero Section */
+    /* Hero Section with Parallax Effect */
     .hero {
         margin-top: 70px;
         position: relative;
@@ -134,11 +349,22 @@
         width: 100%;
         height: 100%;
         opacity: 0;
-        transition: opacity 0.5s ease-in-out;
+        transition: opacity 1s ease-in-out;
     }
     
     .hero-slide.active {
         opacity: 1;
+        animation: zoomIn 20s ease-out, slideRotate 20s ease-out;
+    }
+
+    @keyframes zoomIn {
+        from { transform: scale(1); }
+        to { transform: scale(1.1); }
+    }
+
+    @keyframes slideRotate {
+        from { transform: scale(1) rotate(0deg); }
+        to { transform: scale(1.1) rotate(2deg); }
     }
     
     .hero-slide img {
@@ -153,7 +379,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, rgba(173, 31, 55, 0.9) 0%, rgba(173, 31, 55, 0.7) 100%);
+        background: linear-gradient(135deg, rgba(173, 31, 55, 0.95) 0%, rgba(118, 75, 162, 0.85) 100%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -167,15 +393,32 @@
     }
     
     .hero-content h1 {
-        font-size: 3rem;
+        font-size: 3.5rem;
         margin-bottom: 1rem;
-        animation: fadeInUp 1s;
+        animation: fadeInUp 1s, textGlow 2s infinite alternate, letterWave 3s infinite;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes textGlow {
+        from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        to { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(173, 31, 55, 0.5); }
+    }
+
+    @keyframes letterWave {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
     }
     
     .hero-content p {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         margin-bottom: 2rem;
-        animation: fadeInUp 1s 0.3s both;
+        animation: fadeInUp 1s 0.3s both, fadeFloat 4s ease-in-out infinite;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes fadeFloat {
+        0%, 100% { opacity: 1; transform: translateY(0); }
+        50% { opacity: 0.8; transform: translateY(-5px); }
     }
     
     .hero-dots {
@@ -194,18 +437,55 @@
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.5);
         cursor: pointer;
-        transition: background 0.3s;
+        transition: all 0.3s;
+        animation: dotPulse 2s infinite;
+    }
+
+    @keyframes dotPulse {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.2); opacity: 0.8; }
     }
     
     .dot.active {
         background: white;
+        transform: scale(1.5);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        animation: dotActive 1s infinite;
+    }
+
+    @keyframes dotActive {
+        0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+        50% { box-shadow: 0 0 20px rgba(255, 255, 255, 1); }
+    }
+
+    .dot:hover {
+        transform: scale(1.3);
     }
     
-    /* Trust Metrics */
+    /* Trust Metrics with Creative Animation */
     .trust-metrics {
-        background: white;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
         padding: 3rem 2rem;
-        box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .trust-metrics::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(173, 31, 55, 0.05) 0%, transparent 70%);
+        animation: rotate 30s linear infinite;
+    }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
     
     .metrics-container {
@@ -214,35 +494,99 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
+        position: relative;
+        z-index: 1;
     }
     
     .metric-item {
         text-align: center;
         padding: 2rem;
+        animation: fadeInScale 0.8s ease-out;
+    }
+
+    @keyframes fadeInScale {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
     }
     
     .metric-number {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: bold;
-        color: var(--primary-color);
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         margin-bottom: 0.5rem;
+        animation: numberPulse 2s infinite, numberGlow 3s infinite;
+    }
+
+    @keyframes numberPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.08); }
+    }
+
+    @keyframes numberGlow {
+        0%, 100% { filter: brightness(1); }
+        50% { filter: brightness(1.3); }
     }
     
     .metric-label {
         font-size: 1.1rem;
         color: var(--secondary-color);
+        font-weight: 500;
     }
     
-    /* Section Styles */
+    /* Section Styles with Creative Headers */
     section {
         padding: 4rem 2rem;
+        position: relative;
     }
     
     .section-title {
         text-align: center;
-        font-size: 2.5rem;
+        font-size: 2.8rem;
         margin-bottom: 1rem;
         color: var(--secondary-color);
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: titleReveal 1s ease-out;
+    }
+
+    @keyframes titleReveal {
+        from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .section-title::before {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: var(--gradient-1);
+        border-radius: 2px;
+        animation: expandLine 1s ease-out;
+    }
+
+    @keyframes expandLine {
+        from { width: 0; }
+        to { width: 100px; }
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 4px;
+        background: var(--gradient-2);
+        border-radius: 2px;
+        animation: expandLine 1s 0.2s ease-out backwards;
     }
     
     .section-subtitle {
@@ -250,6 +594,8 @@
         font-size: 1.2rem;
         color: #666;
         margin-bottom: 3rem;
+        margin-top: 2rem;
+        animation: fadeInUp 1s 0.3s both;
     }
     
     .container {
@@ -257,7 +603,7 @@
         margin: 0 auto;
     }
     
-    /* Forms */
+    /* Forms with Creative Input Effects */
     .form-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -268,29 +614,47 @@
     .form-group {
         display: flex;
         flex-direction: column;
+        position: relative;
     }
     
     .form-group label {
         margin-bottom: 0.5rem;
         font-weight: 500;
         color: var(--secondary-color);
+        transition: all 0.3s;
     }
     
     .form-group input,
     .form-group select {
         padding: 0.75rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
         font-size: 1rem;
+        transition: all 0.3s;
+        background: rgba(255, 255, 255, 0.9);
     }
     
     .form-group input:focus,
     .form-group select:focus {
         outline: none;
         border-color: var(--primary-color);
+        box-shadow: 0 0 15px rgba(173, 31, 55, 0.2);
+        transform: translateY(-2px);
+        animation: inputPulse 0.5s;
+    }
+
+    @keyframes inputPulse {
+        0%, 100% { transform: translateY(-2px) scale(1); }
+        50% { transform: translateY(-2px) scale(1.02); }
+    }
+
+    .form-group input:focus + label,
+    .form-group select:focus + label {
+        color: var(--primary-color);
+        transform: translateY(-2px);
     }
     
-    /* Buttons */
+    /* Enhanced Buttons with Ripple Effect */
     .btn {
         padding: 1rem 2rem;
         border: none;
@@ -299,37 +663,78 @@
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:hover::before {
+        width: 300px;
+        height: 300px;
     }
     
     .btn-primary {
-        background: var(--primary-color);
+        background: var(--gradient-1);
         color: white;
+        box-shadow: 0 4px 15px rgba(173, 31, 55, 0.3);
+        animation: btnFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes btnFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
     }
     
     .btn-primary:hover {
-        background: #8b1829;
-        transform: translateY(-2px);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(173, 31, 55, 0.5);
+        animation: btnBounce 0.5s;
+    }
+
+    @keyframes btnBounce {
+        0%, 100% { transform: translateY(-5px) scale(1.05); }
+        50% { transform: translateY(-8px) scale(1.08); }
     }
     
     .btn-secondary {
-        background: var(--accent-color);
+        background: var(--gradient-4);
         color: white;
+        box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
     }
     
     .btn-secondary:hover {
-        background: #d68910;
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(243, 156, 18, 0.5);
     }
     
-    /* Cards */
+    /* Cards with 3D Effect and Tilt */
     .card {
-        background: white;
-        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
         padding: 2rem;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+        transform-style: preserve-3d;
+    }
+
+    .card:hover {
+        transform: perspective(1000px) rotateY(5deg) translateZ(20px);
     }
     
-    /* Calculator */
+    /* Calculator with Gradient Effects */
     .calculator-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -346,30 +751,86 @@
     
     .benchmark-card {
         padding: 1.5rem;
-        border-radius: 8px;
+        border-radius: 20px;
         text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+        animation: cardFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes cardFloat {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(1deg); }
+    }
+
+    .benchmark-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+
+    .benchmark-card:hover {
+        animation: none;
+        transform: translateY(-15px) scale(1.05);
+    }
+
+    .benchmark-card:hover::before {
+        opacity: 1;
+        animation: ripple 1.5s infinite;
+    }
+
+    @keyframes ripple {
+        0% { transform: scale(0); opacity: 1; }
+        100% { transform: scale(1); opacity: 0; }
     }
     
-    /* Comparison Table */
+    /* Comparison Table with Creative Styling */
     .comparison-table {
         width: 100%;
-        border-collapse: collapse;
+        border-collapse: separate;
+        border-spacing: 0;
         margin: 2rem 0;
+        border-radius: 15px;
+        overflow: hidden;
     }
     
     .comparison-table th,
     .comparison-table td {
-        padding: 1rem;
+        padding: 1.2rem;
         text-align: left;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+        transition: all 0.3s;
     }
     
     .comparison-table th {
-        background: var(--primary-color);
+        background: var(--gradient-1);
         color: white;
+        font-weight: 600;
+    }
+
+    .comparison-table tr {
+        transition: all 0.3s;
+    }
+
+    .comparison-table tr:hover td {
+        background: rgba(173, 31, 55, 0.05);
+        transform: scale(1.02);
+        animation: rowGlow 1s;
+    }
+
+    @keyframes rowGlow {
+        0%, 100% { box-shadow: none; }
+        50% { box-shadow: 0 4px 20px rgba(173, 31, 55, 0.2); }
     }
     
-    /* Accreditations */
+    /* Accreditations with Creative Layout */
     .accreditation-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -377,18 +838,20 @@
         margin-top: 2rem;
     }
     
-    /* Program Tabs */
+    /* Program Tabs with Creative Design */
     .program-tabs {
         display: flex;
         gap: 1rem;
         margin-bottom: 2rem;
         justify-content: center;
+        flex-wrap: wrap;
     }
     
     .tab-button {
         padding: 1rem 2rem;
-        background: #f5f5f5;
-        border: none;
+        background: rgba(245, 245, 245, 0.8);
+        backdrop-filter: blur(10px);
+        border: 2px solid transparent;
         border-radius: 25px;
         cursor: pointer;
         font-weight: 500;
@@ -396,19 +859,38 @@
     }
     
     .tab-button.active {
-        background: var(--primary-color);
+        background: var(--gradient-1);
         color: white;
+        box-shadow: 0 4px 15px rgba(173, 31, 55, 0.3);
+        transform: translateY(-2px);
+        animation: tabPulse 1s infinite;
+    }
+
+    @keyframes tabPulse {
+        0%, 100% { transform: translateY(-2px) scale(1); }
+        50% { transform: translateY(-2px) scale(1.05); }
+    }
+
+    .tab-button:hover:not(.active) {
+        border-color: var(--primary-color);
+        transform: translateY(-2px) rotate(1deg);
     }
     
     .program-content {
         display: none;
+        animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
     .program-content.active {
         display: block;
     }
     
-    /* Testimonials */
+    /* Testimonials with Creative Cards */
     .testimonial-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -416,7 +898,7 @@
         margin-top: 2rem;
     }
     
-    /* Placement Partners */
+    /* Placement Partners with Hover Effects */
     .partners-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -427,42 +909,86 @@
     .partner-card {
         text-align: center;
         padding: 1.5rem;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+
+    .partner-card:hover {
+        transform: translateY(-10px) rotate(3deg) scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
     
-    /* FAQ */
+    /* FAQ with Creative Accordion */
     .faq-item {
         margin-bottom: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 8px;
+        border: 2px solid transparent;
+        border-radius: 15px;
         overflow: hidden;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s;
+    }
+
+    .faq-item:hover {
+        border-color: var(--primary-color);
+        transform: translateX(10px);
     }
     
     .faq-question {
         padding: 1.5rem;
-        background: #f5f5f5;
+        background: rgba(245, 245, 245, 0.8);
         cursor: pointer;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        transition: all 0.3s;
+    }
+
+    .faq-question:hover {
+        background: rgba(173, 31, 55, 0.1);
     }
     
     .faq-answer {
         padding: 1.5rem;
         display: none;
+        animation: slideDown 0.3s;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; max-height: 0; transform: translateY(-20px); }
+        to { opacity: 1; max-height: 500px; transform: translateY(0); }
     }
     
     .faq-answer.active {
         display: block;
     }
     
-    /* Footer */
+    /* Footer with Gradient */
     footer {
-        background: var(--secondary-color);
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2d 100%);
         color: white;
         padding: 3rem 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--gradient-1);
+        animation: footerGlow 2s infinite;
+    }
+
+    @keyframes footerGlow {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
     }
     
     .footer-grid {
@@ -473,7 +999,7 @@
         margin: 0 auto;
     }
     
-    /* Floating Action Buttons */
+    /* Floating Action Buttons with Pulse Effect */
     .floating-actions {
         position: fixed;
         bottom: 20px;
@@ -493,12 +1019,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        transition: transform 0.3s;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s;
+        animation: float-pulse 2s infinite;
+    }
+
+    @keyframes float-pulse {
+        0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+        50% { transform: translateY(-8px) scale(1.1); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4); }
     }
     
     .floating-btn:hover {
-        transform: scale(1.1);
+        transform: scale(1.2) rotate(360deg);
     }
     
     /* Responsive Design */
@@ -517,10 +1049,11 @@
             top: 70px;
             left: 0;
             right: 0;
-            background: white;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
             flex-direction: column;
             padding: 2rem;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
         
         .hero-content h1 {
@@ -534,9 +1067,13 @@
         .salary-benchmarks {
             grid-template-columns: 1fr;
         }
+
+        .section-title {
+            font-size: 2rem;
+        }
     }
     
-    /* Animations */
+    /* Advanced Animations */
     @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -547,8 +1084,529 @@
             transform: translateY(0);
         }
     }
+
+    /* Scroll Reveal Animation */
+    .scroll-reveal {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+        transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .scroll-reveal.active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    /* Glowing Effect for Important Elements */
+    .glow-effect {
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from {
+            box-shadow: 0 0 10px rgba(173, 31, 55, 0.5);
+        }
+        to {
+            box-shadow: 0 0 30px rgba(173, 31, 55, 0.8), 0 0 40px rgba(173, 31, 55, 0.6);
+        }
+    }
+
+    /* Magnetic Button Effect */
+    .magnetic-btn {
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Page Load Animation */
+    .page-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        animation: fadeOut 1s 2s forwards;
+    }
+
+    @keyframes fadeOut {
+        to {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    .loader-content {
+        text-align: center;
+        color: white;
+    }
+
+    .loader-spinner {
+        width: 60px;
+        height: 60px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-top: 5px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
 </style>
-</UpdatedStyleBlock>
+
+<UpdatedScriptBlock>Enhanced Interactive Features with More Moving Effects</UpdatedScriptBlock>
+<script>
+    // Page Loader
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.querySelector('.page-loader')?.remove();
+        }, 2000);
+    });
+
+    // Cursor Follower Effect
+    const cursorFollower = document.createElement('div');
+    cursorFollower.className = 'cursor-follower';
+    document.body.appendChild(cursorFollower);
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let followerX = 0;
+    let followerY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+        const diffX = mouseX - followerX;
+        const diffY = mouseY - followerY;
+        
+        followerX += diffX * 0.1;
+        followerY += diffY * 0.1;
+        
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hero Slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        currentSlide = n;
+        if (currentSlide >= slides.length) currentSlide = 0;
+        if (currentSlide < 0) currentSlide = slides.length - 1;
+        
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }
+    
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+    
+    // Auto-advance slides with smoother transition
+    setInterval(nextSlide, 5000);
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+    });
+    
+    // Counter Animation with Creative Effect
+    function animateCounter(element, target) {
+        let current = 0;
+        const increment = target / 100;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current);
+        }, 20);
+    }
+    
+    // Trigger counters on scroll
+    const observerOptions = {
+        threshold: 0.5
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.getAttribute('data-count'));
+                animateCounter(entry.target, target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('[data-count]').forEach(counter => {
+        observer.observe(counter);
+    });
+    
+    // Career Growth Calculator with Enhanced UX
+    function calculateGrowth() {
+        const currentSalary = parseInt(document.getElementById('currentSalary').value);
+        const roleLevel = document.getElementById('currentRole').value;
+        
+        let multiplier;
+        switch(roleLevel) {
+            case 'entry': multiplier = 3.0; break;
+            case 'mid': multiplier = 2.7; break;
+            case 'senior': multiplier = 2.3; break;
+            case 'lead': multiplier = 1.8; break;
+            default: multiplier = 2.5;
+        }
+        
+        const projectedSalary = Math.floor(currentSalary * multiplier);
+        const growthAmount = projectedSalary - currentSalary;
+        const growthPercentage = Math.floor(((projectedSalary - currentSalary) / currentSalary) * 100);
+        
+        // Animate the results
+        const currentDisplay = document.getElementById('currentSalaryDisplay');
+        const projectedDisplay = document.getElementById('projectedSalary');
+        const growthAmountDisplay = document.getElementById('growthAmount');
+        const growthPercentageDisplay = document.getElementById('growthPercentage');
+        
+        // Format currency
+        const formatCurrency = (num) => {
+            return '₹' + num.toLocaleString('en-IN');
+        };
+        
+        // Animate values
+        animateValue(currentDisplay, 0, currentSalary, 1000, formatCurrency);
+        animateValue(projectedDisplay, 0, projectedSalary, 1500, formatCurrency);
+        animateValue(growthAmountDisplay, 0, growthAmount, 1500, formatCurrency);
+        
+        setTimeout(() => {
+            growthPercentageDisplay.textContent = growthPercentage + '% Increase';
+        }, 1500);
+    }
+    
+    function animateValue(element, start, end, duration, formatter) {
+        const range = end - start;
+        const increment = range / (duration / 16);
+        let current = start;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                current = end;
+                clearInterval(timer);
+            }
+            element.textContent = formatter(Math.floor(current));
+        }, 16);
+    }
+    
+    // Form Handlers with Enhanced Feedback
+    document.getElementById('quickEnrollmentForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type="submit"]');
+        btn.style.transform = 'scale(0.95)';
+        btn.innerHTML = '✓ Submitting...';
+        
+        setTimeout(() => {
+            alert('Thank you! Our admissions team will contact you within 24 hours.');
+            this.reset();
+            btn.innerHTML = 'Get Program Details <svg style="width: 20px; height: 20px; display: inline; margin-left: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>';
+            btn.style.transform = 'scale(1)';
+        }, 1500);
+    });
+    
+    // Utility Functions with Creative Animations
+    function scrollToForm() {
+        document.getElementById('enrollment-form').scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'center'
+        });
+        // Add pulse effect to form
+        const form = document.querySelector('#enrollment-form .card');
+        form.style.animation = 'pulse 0.5s';
+        setTimeout(() => form.style.animation = '', 500);
+    }
+    
+    function downloadBrochure() {
+        const link = document.createElement('a');
+        link.href = '/brochure.pdf';
+        link.download = 'SMS_Varanasi_Brochure.pdf';
+        link.click();
+        
+        // Show success message
+        const btn = event.target.closest('button');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✓ Downloaded!';
+        btn.style.background = 'var(--success-color)';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = '';
+        }, 2000);
+    }
+    
+    // Accreditation Functions with Enhanced Modal
+    function verifyAccreditation(type) {
+        alert(`Verification for ${type.toUpperCase()} accreditation: Valid and up-to-date. Certificate ID: ${type.toUpperCase()}-${new Date().getFullYear()}-SMS-VNS`);
+    }
+    
+    function viewRankings() {
+        alert('SMS Varanasi Rankings:\n\n• National Ranking: #15\n• Regional Ranking: #3\n• Placement Excellence: #8\n• Faculty Quality: #12\n• Infrastructure: #10');
+    }
+    
+    function viewAwards() {
+        alert('Recent Awards:\n\n• Best Placement Record 2024 - National Education Summit\n• Excellence in Management Education - Indian B-School Awards\n• Top Industry-Integrated Program - Corporate Excellence Awards\n• Innovation in Curriculum - Academic Excellence Summit');
+    }
+    
+    // Mobile Menu Toggle with Animation
+    document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
+        this.classList.toggle('active');
+    });
+    
+    // FAQ Accordion with Smooth Animation
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const icon = this.querySelector('svg');
+            
+            // Close other open FAQs
+            document.querySelectorAll('.faq-answer').forEach(a => {
+                if (a !== answer) {
+                    a.classList.remove('active');
+                }
+            });
+            
+            answer.classList.toggle('active');
+            
+            // Rotate icon
+            if (answer.classList.contains('active')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        });
+    });
+    
+    // Enhanced Scroll Reveal Animation
+    const scrollRevealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                entry.target.style.transitionDelay = `${Math.random() * 0.3}s`;
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    });
+    
+    document.querySelectorAll('.scroll-reveal').forEach(element => {
+        scrollRevealObserver.observe(element);
+    });
+    
+    // Add scroll reveal class to sections
+    window.addEventListener('load', () => {
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('scroll-reveal');
+        });
+    });
+    
+    // Enhanced Floating Particles Animation
+    function createParticles() {
+        const container = document.createElement('div');
+        container.className = 'floating-particles';
+        document.body.appendChild(container);
+        
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            
+            // Random colors for particles
+            const colors = ['#ad1f37', '#667eea', '#764ba2', '#f093fb'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            container.appendChild(particle);
+        }
+    }
+    
+    createParticles();
+    
+    // Enhanced Button Ripple Effect
+    document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const ripple = document.createElement('span');
+            ripple.style.position = 'absolute';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.width = '0';
+            ripple.style.height = '0';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.animation = 'ripple-effect 0.6s ease-out';
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+    
+    // Add ripple animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple-effect {
+            to {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Enhanced Parallax Effect on Scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const scrolled = window.pageYOffset;
+                
+                // Parallax for hero overlay
+                const parallaxElements = document.querySelectorAll('.hero-overlay');
+                parallaxElements.forEach(element => {
+                    const speed = 0.5;
+                    element.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+                
+                // Parallax for cards
+                const cards = document.querySelectorAll('.card-enhanced, .text-box-enhanced');
+                cards.forEach((card, index) => {
+                    const rect = card.getBoundingClientRect();
+                    const speed = 0.05 + (index % 3) * 0.02;
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        const offset = (window.innerHeight - rect.top) * speed;
+                        card.style.transform = `translateY(${-offset}px)`;
+                    }
+                });
+                
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    // Add glow effect to important CTAs
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.classList.add('glow-effect');
+    });
+
+    // Magnetic Button Effect
+    document.querySelectorAll('.btn').forEach(button => {
+        button.classList.add('magnetic-btn');
+        
+        button.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            const moveX = x * 0.2;
+            const moveY = y * 0.2;
+            
+            this.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translate(0, 0) scale(1)';
+        });
+    });
+
+    // Card Tilt Effect
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+        });
+    });
+
+    // Animate numbers on scroll into view
+    const animateOnScroll = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.8s ease-out';
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.metric-item, .benchmark-card').forEach(element => {
+        animateOnScroll.observe(element);
+    });
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Random floating animation delays for cards
+    document.querySelectorAll('.text-box-enhanced, .card-enhanced').forEach((element, index) => {
+        element.style.animationDelay = `${index * 0.1}s`;
+    });
+</script>
+
+<AddedSection>
+    <SectionName>Page Loader</SectionName>
+    <SectionAbove></SectionAbove>
+</AddedSection>
+<!-- Page Loader -->
+<div class="page-loader">
+    <div class="loader-content">
+        <div class="loader-spinner"></div>
+        <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">SMS Varanasi</h2>
+        <p style="font-size: 1.1rem; opacity: 0.9;">Loading your career transformation...</p>
+    </div>
+</div>
 
 <UpdatedSection>Trust Metrics & Enrollment Section</UpdatedSection>
 <!-- Trust Metrics & Enrollment Section -->
