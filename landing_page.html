@@ -1,0 +1,953 @@
+<UpdatedStyleBlock>
+<style>
+    :root {
+        --primary-color: #ad1f37;
+        --secondary-color: #1a1a1a;
+        --accent-color: #f39c12;
+        --success-color: #27ae60;
+        --warning-color: #e74c3c;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--secondary-color);
+    }
+
+    /* Text Box Enhancement Styles */
+    .text-box-enhanced {
+        border: 1px solid #e0e0e0;
+        background-color: #f8f9fa;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .text-box-enhanced:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Enhanced card styles */
+    .card-enhanced {
+        border: 1px solid #e0e0e0;
+        background-color: #f8f9fa;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-enhanced:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Header Styles */
+    header {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+    }
+    
+    .nav-links a {
+        text-decoration: none;
+        color: var(--secondary-color);
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+        color: var(--primary-color);
+    }
+    
+    .cta-button {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    
+    .cta-button:hover {
+        background: #8b1829;
+    }
+    
+    .mobile-menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+    }
+    
+    .mobile-menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: var(--secondary-color);
+        margin: 3px 0;
+        transition: 0.3s;
+    }
+    
+    /* Hero Section */
+    .hero {
+        margin-top: 70px;
+        position: relative;
+        height: 600px;
+        overflow: hidden;
+    }
+    
+    .hero-slider {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .hero-slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+    
+    .hero-slide.active {
+        opacity: 1;
+    }
+    
+    .hero-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(173, 31, 55, 0.9) 0%, rgba(173, 31, 55, 0.7) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-content {
+        text-align: center;
+        color: white;
+        max-width: 800px;
+        padding: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s;
+    }
+    
+    .hero-content p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s 0.3s both;
+    }
+    
+    .hero-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+    }
+    
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    .dot.active {
+        background: white;
+    }
+    
+    /* Trust Metrics */
+    .trust-metrics {
+        background: white;
+        padding: 3rem 2rem;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+    }
+    
+    .metrics-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+    
+    .metric-item {
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .metric-number {
+        font-size: 3rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-label {
+        font-size: 1.1rem;
+        color: var(--secondary-color);
+    }
+    
+    /* Section Styles */
+    section {
+        padding: 4rem 2rem;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--secondary-color);
+    }
+    
+    .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 3rem;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    /* Forms */
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .form-group label {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--secondary-color);
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .btn-primary {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background: #8b1829;
+        transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+        background: var(--accent-color);
+        color: white;
+    }
+    
+    .btn-secondary:hover {
+        background: #d68910;
+        transform: translateY(-2px);
+    }
+    
+    /* Cards */
+    .card {
+        background: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* Calculator */
+    .calculator-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .salary-benchmarks {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .benchmark-card {
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    /* Comparison Table */
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .comparison-table th {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    /* Accreditations */
+    .accreditation-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    /* Program Tabs */
+    .program-tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        justify-content: center;
+    }
+    
+    .tab-button {
+        padding: 1rem 2rem;
+        background: #f5f5f5;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    
+    .tab-button.active {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .program-content {
+        display: none;
+    }
+    
+    .program-content.active {
+        display: block;
+    }
+    
+    /* Testimonials */
+    .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    /* Placement Partners */
+    .partners-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .partner-card {
+        text-align: center;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* FAQ */
+    .faq-item {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .faq-question {
+        padding: 1.5rem;
+        background: #f5f5f5;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .faq-answer {
+        padding: 1.5rem;
+        display: none;
+    }
+    
+    .faq-answer.active {
+        display: block;
+    }
+    
+    /* Footer */
+    footer {
+        background: var(--secondary-color);
+        color: white;
+        padding: 3rem 2rem;
+    }
+    
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    /* Floating Action Buttons */
+    .floating-actions {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 999;
+    }
+    
+    .floating-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: transform 0.3s;
+    }
+    
+    .floating-btn:hover {
+        transform: scale(1.1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+        }
+        
+        .mobile-menu-toggle {
+            display: flex;
+        }
+        
+        .nav-links.active {
+            display: flex;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: white;
+            flex-direction: column;
+            padding: 2rem;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hero-content h1 {
+            font-size: 2rem;
+        }
+        
+        .calculator-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .salary-benchmarks {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+</UpdatedStyleBlock>
+
+<UpdatedSection>Trust Metrics & Enrollment Section</UpdatedSection>
+<!-- Trust Metrics & Enrollment Section -->
+<section class="trust-metrics">
+    <div class="metrics-container">
+        <div class="metric-item card-enhanced">
+            <div class="metric-number" data-count="5000">0</div>
+            <div class="metric-label">Alumni Placed</div>
+        </div>
+        <div class="metric-item card-enhanced">
+            <div class="metric-number">₹8.5L</div>
+            <div class="metric-label">Average Salary Increase</div>
+        </div>
+        <div class="metric-item card-enhanced">
+            <div class="metric-number" data-count="95">0</div>
+            <div class="metric-label">% Placement Rate</div>
+        </div>
+    </div>
+</section>
+
+<!-- Enrollment Form Section -->
+<section id="enrollment-form" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+    <div class="container">
+        <h2 class="section-title">Start Your Journey Today</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Transform Your Career with SMS Varanasi</h3>
+                <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">Join thousands of successful professionals who have accelerated their careers with our world-class management programs.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-primary" onclick="scrollToForm()">
+                        <svg style="width: 20px; height: 20px; display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                        Apply Now
+                    </button>
+                    <button class="btn btn-secondary" onclick="downloadBrochure()">
+                        <svg style="width: 20px; height: 20px; display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Download Brochure
+                    </button>
+                </div>
+            </div>
+            <div class="card text-box-enhanced">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary-color);">Quick Enrollment</h3>
+                <form id="quickEnrollmentForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" pattern="[0-9]{10}" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="program">Preferred Program *</label>
+                            <select id="program" required>
+                                <option value="">Select a program</option>
+                                <option value="mba-fulltime">MBA (Full-time)</option>
+                                <option value="pgdm">PGDM (Post Graduate Diploma)</option>
+                                <option value="executive-mba">Executive MBA</option>
+                                <option value="mba-finance">MBA - Finance</option>
+                                <option value="mba-marketing">MBA - Marketing</option>
+                                <option value="mba-hr">MBA - Human Resources</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        Get Program Details
+                        <svg style="width: 20px; height: 20px; display: inline; margin-left: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </button>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 1rem; text-align: center;">
+                        By submitting, you agree to receive program information via email and phone.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<UpdatedSection>Career Stagnation Calculator Section</UpdatedSection>
+<!-- Career Stagnation Calculator Section -->
+<section style="background: #f8f9fa;">
+    <div class="container">
+        <h2 class="section-title">Are You Missing Out on Career Growth?</h2>
+        <p class="section-subtitle">Calculate your potential salary increase with an MBA/PGDM from SMS Varanasi</p>
+        
+        <div class="calculator-grid">
+            <div class="card text-box-enhanced">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary-color);">Career Growth Calculator</h3>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="currentSalary">Current Annual Salary (₹)</label>
+                    <input type="number" id="currentSalary" value="500000" min="0" step="50000">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="currentRole">Current Role Level</label>
+                    <select id="currentRole">
+                        <option value="entry">Entry Level (0-2 years)</option>
+                        <option value="mid" selected>Mid Level (3-5 years)</option>
+                        <option value="senior">Senior Level (6-10 years)</option>
+                        <option value="lead">Lead/Manager (10+ years)</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" onclick="calculateGrowth()">
+                    Calculate Growth Gap
+                </button>
+            </div>
+            
+            <div class="card text-box-enhanced" id="growthResults">
+                <h3 style="margin-bottom: 1.5rem;">Your Career Growth Potential</h3>
+                <div style="text-align: center;">
+                    <div style="margin-bottom: 2rem;">
+                        <p style="color: #666; margin-bottom: 0.5rem;">Current Salary</p>
+                        <p style="font-size: 2rem; font-weight: bold; color: var(--secondary-color);" id="currentSalaryDisplay">₹5,00,000</p>
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <p style="color: #666; margin-bottom: 0.5rem;">Projected Salary with MBA/PGDM</p>
+                        <p style="font-size: 2.5rem; font-weight: bold; color: var(--success-color);" id="projectedSalary">₹13,50,000</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white;">
+                        <p style="margin-bottom: 0.5rem;">Potential Growth</p>
+                        <p style="font-size: 2rem; font-weight: bold;" id="growthAmount">₹8,50,000</p>
+                        <p style="font-size: 1.2rem; margin-top: 0.5rem;" id="growthPercentage">170% Increase</p>
+                    </div>
+                    <p style="margin-top: 1.5rem; color: var(--primary-color); font-weight: bold;">
+                        With SMS Varanasi's Programs
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="salary-benchmarks">
+            <div class="benchmark-card text-box-enhanced" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                <h4 style="margin-bottom: 0.5rem;">Finance</h4>
+                <p style="font-size: 1.5rem; font-weight: bold;">₹12-18 Lakhs</p>
+                <p style="font-size: 0.9rem;">Post-MBA Salary Range</p>
+            </div>
+            <div class="benchmark-card text-box-enhanced" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                <h4 style="margin-bottom: 0.5rem;">Marketing</h4>
+                <p style="font-size: 1.5rem; font-weight: bold;">₹10-15 Lakhs</p>
+                <p style="font-size: 0.9rem;">Post-MBA Salary Range</p>
+            </div>
+            <div class="benchmark-card text-box-enhanced" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white;">
+                <h4 style="margin-bottom: 0.5rem;">Consulting</h4>
+                <p style="font-size: 1.5rem; font-weight: bold;">₹15-22 Lakhs</p>
+                <p style="font-size: 0.9rem;">Post-MBA Salary Range</p>
+            </div>
+            <div class="benchmark-card text-box-enhanced" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white;">
+                <h4 style="margin-bottom: 0.5rem;">Operations</h4>
+                <p style="font-size: 1.5rem; font-weight: bold;">₹11-16 Lakhs</p>
+                <p style="font-size: 0.9rem;">Post-MBA Salary Range</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<UpdatedSection>SMS Varanasi Solution Section</UpdatedSection>
+<!-- SMS Varanasi Solution Section -->
+<section style="background: white;">
+    <div class="container">
+        <h2 class="section-title">Why SMS Varanasi is Your Best Choice</h2>
+        <p class="section-subtitle">Compare our offerings with other institutes</p>
+        
+        <div class="card text-box-enhanced" style="overflow-x: auto;">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Features</th>
+                        <th style="background: var(--success-color);">SMS Varanasi</th>
+                        <th>Other Institutes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Placement Guarantee</strong></td>
+                        <td style="text-align: center;">
+                            <svg style="width: 24px; height: 24px; color: var(--success-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </td>
+                        <td style="text-align: center;">
+                            <svg style="width: 24px; height: 24px; color: var(--warning-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Industry Partnerships</strong></td>
+                        <td style="text-align: center;"><strong>200+</strong></td>
+                        <td style="text-align: center;">50-100</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Faculty with Industry Experience</strong></td>
+                        <td style="text-align: center;"><strong>90%</strong></td>
+                        <td style="text-align: center;">40-60%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Live Projects</strong></td>
+                        <td style="text-align: center;">
+                            <svg style="width: 24px; height: 24px; color: var(--success-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </td>
+                        <td style="text-align: center;">Limited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Average Salary Increase</strong></td>
+                        <td style="text-align: center;"><strong>170%</strong></td>
+                        <td style="text-align: center;">80-120%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <div class="card text-box-enhanced">
+                <div style="width: 60px; height: 60px; background: var(--success-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                    <svg style="width: 30px; height: 30px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Guaranteed Placement</h3>
+                <p style="color: #666; margin-bottom: 1rem;">95% placement rate with money-back guarantee if not placed within 6 months of completion.</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                        <svg style="width: 20px; height: 20px; color: var(--success-color); display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Dedicated placement cell
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                        <svg style="width: 20px; height: 20px; color: var(--success-color); display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Interview preparation workshops
+                    </li>
+                    <li style="padding: 0.5rem 0;">
+                        <svg style="width: 20px; height: 20px; color: var(--success-color); display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Resume building assistance
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card text-box-enhanced">
+                <div style="width: 60px; height: 60px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                    <svg style="width: 30px; height: 30px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Industry Network</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Access to 200+ corporate partners including Fortune 500 companies for internships and placements.</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                        <svg style="width: 20px; height: 20px; color: var(--success-color); display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Regular industry interactions
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                        <svg style="width: 20px; height: 20px; color: var(--success-color); display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Guest lectures from CEOs
+                    </li>
+                    <li style="padding: 0.5rem 0;">
+                        <svg style="width: 20px; height: 20px; color: var(--success-color); display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Industry mentorship programs
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card text-box-enhanced">
+                <div style="width: 60px; height: 60px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                    <svg style="width: 30px; height: 30px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <h3 style="margin-bottom: 1rem; color: var(--primary-color);">World-Class Curriculum</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Industry-relevant curriculum updated quarterly with input from corporate leaders and alumni.</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                        <svg style="width: 20px; height: 20px; color: var(--success-color); display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Latest business trends
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                        <svg style="width: 20px; height: 20px; color: var(--success-color); display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Practical case studies
+                    </li>
+                    <li style="padding: 0.5rem 0;">
+                        <svg style="width: 20px; height: 20px; color: var(--success-color); display: inline; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Skill-focused training
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<UpdatedSection>Rankings & Accreditations Section</UpdatedSection>
+<!-- Rankings & Accreditations Section -->
+<section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+    <div class="container">
+        <h2 class="section-title" style="color: white;">Recognized Excellence in Management Education</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Our commitment to quality education is demonstrated through prestigious accreditations and rankings</p>
+        
+        <div class="accreditation-grid">
+            <div class="card text-box-enhanced">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <svg style="width: 60px; height: 60px; color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                </div>
+                <h3 style="text-align: center; margin-bottom: 0.5rem; color: var(--primary-color);">AICTE Approval</h3>
+                <p style="text-align: center; color: #666;">Certified by All India Council for Technical Education</p>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="verifyAccreditation('aicte')">
+                    Verify Certificate
+                </button>
+            </div>
+            
+            <div class="card text-box-enhanced">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <svg style="width: 60px; height: 60px; color: var(--success-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                    </svg>
+                </div>
+                <h3 style="text-align: center; margin-bottom: 0.5rem; color: var(--primary-color);">NAAC A+ Rating</h3>
+                <p style="text-align: center; color: #666;">Highest grade from National Assessment and Accreditation Council</p>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="verifyAccreditation('naac')">
+                    View Details
+                </button>
+            </div>
+            
+            <div class="card text-box-enhanced">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <svg style="width: 60px; height: 60px; color: var(--accent-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 style="text-align: center; margin-bottom: 0.5rem; color: var(--primary-color);">National Ranking #15</h3>
+                <p style="text-align: center; color: #666;">Ranked among top 15 B-Schools in India</p>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="viewRankings()">
+                    View Rankings
+                </button>
+            </div>
+            
+            <div class="card text-box-enhanced">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <svg style="width: 60px; height: 60px; color: var(--warning-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                    </svg>
+                </div>
+                <h3 style="text-align: center; margin-bottom: 0.5rem; color: var(--primary-color);">Industry Awards</h3>
+                <p style="text-align: center; color: #666;">Best Placement Record & Excellence in Management Education 2024</p>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="viewAwards()">
+                    View Awards
+                </button>
+            </div>
+        </div>
+        
+        <div style="margin-top: 3rem;">
+            <h3 style="text-align: center; margin-bottom: 2rem; color: white;">Government Recognitions & Approvals</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="card text-box-enhanced" style="text-align: center; padding: 1.5rem;">
+                    <p style="font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">UGC Recognized</p>
+                    <p style="font-size: 0.9rem; color: #666;">University Grants Commission</p>
+                </div>
+                <div class="card text-box-enhanced" style="text-align: center; padding: 1.5rem;">
+                    <p style="font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">AIU Member</p>
+                    <p style="font-size: 0.9rem; color: #666;">Association of Indian Universities</p>
+                </div>
+                <div class="card text-box-enhanced" style="text-align: center; padding: 1.5rem;">
+                    <p style="font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">ISO Certified</p>
+                    <p style="font-size: 0.9rem; color: #666;">ISO 9001:2015 Quality Standards</p>
+                </div>
+                <div class="card text-box-enhanced" style="text-align: center; padding: 1.5rem;">
+                    <p style="font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">NIRF Ranked</p>
+                    <p style="font-size: 0.9rem; color: #666;">National Institutional Ranking Framework</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script id="dhws-dataInjector" src="/public/dhws-data-injector.js"></script>
