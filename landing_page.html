@@ -1,4 +1,4 @@
-<UpdatedStyleBlock>Enhanced Creative Styles with More Moving Effects</UpdatedStyleBlock>
+<UpdatedStyleBlock>Enhanced Creative Styles with Network Connection Lines</UpdatedStyleBlock>
 <style>
     :root {
         --primary-color: #ad1f37;
@@ -830,12 +830,109 @@
         50% { box-shadow: 0 4px 20px rgba(173, 31, 55, 0.2); }
     }
     
-    /* Accreditations with Creative Layout */
+    /* Accreditations with Network Connection Lines */
     .accreditation-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
         margin-top: 2rem;
+        position: relative;
+    }
+
+    /* Network Connection Container */
+    .network-connections {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .accreditation-grid > .card {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Animated Connection Lines */
+    .connection-line {
+        position: absolute;
+        background: linear-gradient(90deg, 
+            rgba(173, 31, 55, 0.3) 0%,
+            rgba(102, 126, 234, 0.5) 50%,
+            rgba(173, 31, 55, 0.3) 100%);
+        height: 2px;
+        transform-origin: left center;
+        animation: lineFlow 3s ease-in-out infinite;
+        box-shadow: 0 0 10px rgba(173, 31, 55, 0.4);
+    }
+
+    @keyframes lineFlow {
+        0%, 100% {
+            opacity: 0.4;
+            transform: scaleX(1);
+        }
+        50% {
+            opacity: 0.8;
+            transform: scaleX(1.05);
+        }
+    }
+
+    /* Connection dots at intersections */
+    .connection-dot {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: dotPulseNetwork 2s ease-in-out infinite;
+        box-shadow: 0 0 15px rgba(173, 31, 55, 0.6);
+    }
+
+    @keyframes dotPulseNetwork {
+        0%, 100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.6;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.5);
+            opacity: 1;
+        }
+    }
+
+    /* Enhanced accreditation cards for network effect */
+    .accreditation-grid .card {
+        border: 2px solid rgba(173, 31, 55, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .accreditation-grid .card:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 30px rgba(173, 31, 55, 0.4);
+    }
+
+    /* Connection pulse effect */
+    .connection-pulse {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle, rgba(173, 31, 55, 0.6) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: pulseExpand 2s ease-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes pulseExpand {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(3);
+            opacity: 0;
+        }
     }
     
     /* Program Tabs with Creative Design */
@@ -1071,6 +1168,13 @@
         .section-title {
             font-size: 2rem;
         }
+
+        /* Hide network connections on mobile for performance */
+        .connection-line,
+        .connection-dot,
+        .connection-pulse {
+            display: none;
+        }
     }
     
     /* Advanced Animations */
@@ -1159,7 +1263,7 @@
     }
 </style>
 
-<UpdatedScriptBlock>Enhanced Interactive Features with More Moving Effects</UpdatedScriptBlock>
+<UpdatedScriptBlock>Enhanced Interactive Features with Network Diagram</UpdatedScriptBlock>
 <script>
     // Page Loader
     window.addEventListener('load', () => {
@@ -1196,6 +1300,130 @@
         requestAnimationFrame(animateCursor);
     }
     animateCursor();
+
+    // Network Connection Lines for Accreditation Cards
+    function createNetworkConnections() {
+        const accreditationSection = document.querySelector('.accreditation-grid');
+        if (!accreditationSection) return;
+
+        // Create network connections container
+        const networkContainer = document.createElement('div');
+        networkContainer.className = 'network-connections';
+        accreditationSection.insertBefore(networkContainer, accreditationSection.firstChild);
+
+        // Get all accreditation cards
+        const cards = accreditationSection.querySelectorAll('.card');
+        if (cards.length < 2) return;
+
+        // Calculate card positions and create connections
+        function drawConnections() {
+            // Clear existing connections
+            networkContainer.innerHTML = '';
+
+            const cardPositions = [];
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const containerRect = accreditationSection.getBoundingClientRect();
+                cardPositions.push({
+                    x: rect.left - containerRect.left + rect.width / 2,
+                    y: rect.top - containerRect.top + rect.height / 2,
+                    width: rect.width,
+                    height: rect.height
+                });
+            });
+
+            // Create connections between cards
+            for (let i = 0; i < cardPositions.length; i++) {
+                for (let j = i + 1; j < cardPositions.length; j++) {
+                    const start = cardPositions[i];
+                    const end = cardPositions[j];
+
+                    // Calculate distance and angle
+                    const dx = end.x - start.x;
+                    const dy = end.y - start.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+                    // Create connection line
+                    const line = document.createElement('div');
+                    line.className = 'connection-line';
+                    line.style.width = distance + 'px';
+                    line.style.left = start.x + 'px';
+                    line.style.top = start.y + 'px';
+                    line.style.transform = `rotate(${angle}deg)`;
+                    line.style.animationDelay = `${(i + j) * 0.2}s`;
+                    networkContainer.appendChild(line);
+
+                    // Create connection dot at start
+                    const dotStart = document.createElement('div');
+                    dotStart.className = 'connection-dot';
+                    dotStart.style.left = start.x + 'px';
+                    dotStart.style.top = start.y + 'px';
+                    dotStart.style.animationDelay = `${i * 0.3}s`;
+                    networkContainer.appendChild(dotStart);
+
+                    // Create connection dot at end
+                    const dotEnd = document.createElement('div');
+                    dotEnd.className = 'connection-dot';
+                    dotEnd.style.left = end.x + 'px';
+                    dotEnd.style.top = end.y + 'px';
+                    dotEnd.style.animationDelay = `${j * 0.3}s`;
+                    networkContainer.appendChild(dotEnd);
+
+                    // Create pulse effect at midpoint
+                    const midX = (start.x + end.x) / 2;
+                    const midY = (start.y + end.y) / 2;
+                    const pulse = document.createElement('div');
+                    pulse.className = 'connection-pulse';
+                    pulse.style.left = midX + 'px';
+                    pulse.style.top = midY + 'px';
+                    pulse.style.animationDelay = `${(i + j) * 0.4}s`;
+                    networkContainer.appendChild(pulse);
+                }
+            }
+        }
+
+        // Initial draw
+        setTimeout(drawConnections, 500);
+
+        // Redraw on window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(drawConnections, 250);
+        });
+
+        // Add hover effect to cards
+        cards.forEach((card, index) => {
+            card.addEventListener('mouseenter', () => {
+                // Highlight connected lines
+                const lines = networkContainer.querySelectorAll('.connection-line');
+                lines.forEach(line => {
+                    line.style.opacity = '0.2';
+                });
+                
+                // Make lines connected to this card more prominent
+                Array.from(lines).slice(index * (cards.length - 1), (index + 1) * (cards.length - 1)).forEach(line => {
+                    line.style.opacity = '1';
+                    line.style.height = '3px';
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                // Reset all lines
+                const lines = networkContainer.querySelectorAll('.connection-line');
+                lines.forEach(line => {
+                    line.style.opacity = '';
+                    line.style.height = '';
+                });
+            });
+        });
+    }
+
+    // Initialize network connections after page load
+    window.addEventListener('load', () => {
+        setTimeout(createNetworkConnections, 1000);
+    });
 
     // Hero Slider
     let currentSlide = 0;
